@@ -34,7 +34,6 @@ class EventContainerWrapper extends React.Component {
       onDropFromOutside: PropTypes.func,
       onBeginAction: PropTypes.func,
       dragAndDropAction: PropTypes.object,
-      dragFromOutsideItem: PropTypes.func,
     }),
   }
 
@@ -165,14 +164,6 @@ class EventContainerWrapper extends React.Component {
       const bounds = getBoundsForNode(node)
 
       if (!pointInColumn(bounds, point)) return
-
-      this.handleDropFromOutside(point, bounds)
-    })
-
-    selector.on('dragOver', point => {
-      if (!this.context.draggable.dragFromOutsideItem) return
-
-      const bounds = getBoundsForNode(node)
 
       this.handleDropFromOutside(point, bounds)
     })

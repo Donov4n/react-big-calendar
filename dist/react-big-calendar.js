@@ -3108,9 +3108,7 @@
           _this$props$component = _this$props.components,
           Event = _this$props$component.event,
           EventWrapper = _this$props$component.eventWrapper,
-          slotStart = _this$props.slotStart,
-          slotEnd = _this$props.slotEnd,
-          props = _objectWithoutPropertiesLoose(_this$props, ["style", "className", "event", "selected", "isAllDay", "onSelect", "onDoubleClick", "localizer", "continuesPrior", "continuesAfter", "accessors", "getters", "children", "components", "slotStart", "slotEnd"]);
+          props = _objectWithoutPropertiesLoose(_this$props, ["style", "className", "event", "selected", "isAllDay", "onSelect", "onDoubleClick", "localizer", "continuesPrior", "continuesAfter", "accessors", "getters", "children", "components"]);
 
       var title = accessors.title(event);
       var tooltip = accessors.tooltip(event);
@@ -3124,13 +3122,9 @@
         title: tooltip || undefined
       }, Event ? React__default.createElement(Event, {
         event: event,
-        continuesPrior: continuesPrior,
-        continuesAfter: continuesAfter,
         title: title,
         isAllDay: allDay,
-        localizer: localizer,
-        slotStart: slotStart,
-        slotEnd: slotEnd
+        localizer: localizer
       }) : title);
       return React__default.createElement(EventWrapper, _extends({}, this.props, {
         type: "date"
@@ -3321,8 +3315,6 @@
           onDoubleClick: onDoubleClick,
           continuesPrior: lt(accessors.end(event), slotStart, 'day'),
           continuesAfter: gte(accessors.start(event), slotEnd, 'day'),
-          slotStart: slotStart,
-          slotEnd: slotEnd,
           selected: isSelected(event, selected)
         });
       }));
@@ -7863,15 +7855,13 @@
       this._handleMoveEvent = this._handleMoveEvent.bind(this);
       this._handleTerminatingEvent = this._handleTerminatingEvent.bind(this);
       this._keyListener = this._keyListener.bind(this);
-      this._dropFromOutsideListener = this._dropFromOutsideListener.bind(this);
-      this._dragOverFromOutsideListener = this._dragOverFromOutsideListener.bind(this); // Fixes an iOS 10 bug where scrolling could not be prevented on the window.
+      this._dropFromOutsideListener = this._dropFromOutsideListener.bind(this); // Fixes an iOS 10 bug where scrolling could not be prevented on the window.
       // https://github.com/metafizzy/flickity/issues/457#issuecomment-254501356
 
       this._onTouchMoveWindowListener = addEventListener('touchmove', function () {}, window);
       this._onKeyDownListener = addEventListener('keydown', this._keyListener);
       this._onKeyUpListener = addEventListener('keyup', this._keyListener);
       this._onDropFromOutsideListener = addEventListener('drop', this._dropFromOutsideListener);
-      this._onDragOverfromOutisde = addEventListener('dragover', this._dragOverFromOutsideListener);
 
       this._addInitialEventListener();
     }
@@ -7912,7 +7902,6 @@
       this._onMoveListener && this._onMoveListener.remove();
       this._onKeyUpListener && this._onKeyUpListener.remove();
       this._onKeyDownListener && this._onKeyDownListener.remove();
-      this._onDropFromOutsideListener && this._onDragOverfromOutisde.remove();
     };
 
     _proto.isSelected = function isSelected(node) {
@@ -8023,32 +8012,16 @@
       e.preventDefault();
     };
 
-    _proto._dragOverFromOutsideListener = function _dragOverFromOutsideListener(e) {
-      var _getEventCoordinates2 = getEventCoordinates(e),
-          pageX = _getEventCoordinates2.pageX,
-          pageY = _getEventCoordinates2.pageY,
-          clientX = _getEventCoordinates2.clientX,
-          clientY = _getEventCoordinates2.clientY;
-
-      this.emit('dragOverFromOutside', {
-        x: pageX,
-        y: pageY,
-        clientX: clientX,
-        clientY: clientY
-      });
-      e.preventDefault();
-    };
-
     _proto._handleInitialEvent = function _handleInitialEvent(e) {
       if (this.isDetached) {
         return;
       }
 
-      var _getEventCoordinates3 = getEventCoordinates(e),
-          clientX = _getEventCoordinates3.clientX,
-          clientY = _getEventCoordinates3.clientY,
-          pageX = _getEventCoordinates3.pageX,
-          pageY = _getEventCoordinates3.pageY;
+      var _getEventCoordinates2 = getEventCoordinates(e),
+          clientX = _getEventCoordinates2.clientX,
+          clientY = _getEventCoordinates2.clientY,
+          pageX = _getEventCoordinates2.pageX,
+          pageY = _getEventCoordinates2.pageY;
 
       var node = this.container(),
           collides,
@@ -8105,9 +8078,9 @@
     };
 
     _proto._handleTerminatingEvent = function _handleTerminatingEvent(e) {
-      var _getEventCoordinates4 = getEventCoordinates(e),
-          pageX = _getEventCoordinates4.pageX,
-          pageY = _getEventCoordinates4.pageY;
+      var _getEventCoordinates3 = getEventCoordinates(e),
+          pageX = _getEventCoordinates3.pageX,
+          pageY = _getEventCoordinates3.pageY;
 
       this.selecting = false;
       this._onEndListener && this._onEndListener.remove();
@@ -8135,11 +8108,11 @@
     };
 
     _proto._handleClickEvent = function _handleClickEvent(e) {
-      var _getEventCoordinates5 = getEventCoordinates(e),
-          pageX = _getEventCoordinates5.pageX,
-          pageY = _getEventCoordinates5.pageY,
-          clientX = _getEventCoordinates5.clientX,
-          clientY = _getEventCoordinates5.clientY;
+      var _getEventCoordinates4 = getEventCoordinates(e),
+          pageX = _getEventCoordinates4.pageX,
+          pageY = _getEventCoordinates4.pageY,
+          clientX = _getEventCoordinates4.clientX,
+          clientY = _getEventCoordinates4.clientY;
 
       var now = new Date().getTime();
 
@@ -8175,9 +8148,9 @@
           x = _this$_initialEventDa.x,
           y = _this$_initialEventDa.y;
 
-      var _getEventCoordinates6 = getEventCoordinates(e),
-          pageX = _getEventCoordinates6.pageX,
-          pageY = _getEventCoordinates6.pageY;
+      var _getEventCoordinates5 = getEventCoordinates(e),
+          pageX = _getEventCoordinates5.pageX,
+          pageY = _getEventCoordinates5.pageY;
 
       var w = Math.abs(x - pageX);
       var h = Math.abs(y - pageY);
@@ -8536,8 +8509,6 @@
         onDoubleClick: onDoubleClick,
         continuesPrior: continuesPrior,
         continuesAfter: continuesAfter,
-        slotStart: slotMetrics.first,
-        slotEnd: slotMetrics.last,
         selected: isSelected(event, selected)
       });
     },
@@ -13158,7 +13129,7 @@
           var tail = !getNowChanged && eq(prevProps.date, this.props.date, 'minutes') && prevState.timeIndicatorPosition === this.state.timeIndicatorPosition;
           this.setTimeIndicatorPositionUpdateInterval(tail);
         }
-      } else if (this.props.isNow && (!eq(prevProps.min, this.props.min, 'minutes') || !eq(prevProps.max, this.props.max, 'minutes'))) {
+      } else if (this.props.isNow && !eq(prevProps.min, this.props.min, 'minutes')) {
         this.positionTimeIndicator();
       }
     };

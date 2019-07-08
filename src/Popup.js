@@ -71,8 +71,6 @@ class Popup extends React.Component {
             onDoubleClick={onDoubleClick}
             continuesPrior={dates.lt(accessors.end(event), slotStart, 'day')}
             continuesAfter={dates.gte(accessors.start(event), slotEnd, 'day')}
-            slotStart={slotStart}
-            slotEnd={slotEnd}
             selected={isSelected(event, selected)}
           />
         ))}
