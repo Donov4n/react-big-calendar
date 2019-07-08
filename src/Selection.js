@@ -306,17 +306,17 @@ class Selection {
     if (e.key === 'Escape') {
       return this.emit('reset')
     }
+    
+    // User drag-clicked in the Selectable area
+    if (!click) {
+        return this.emit('select', bounds)
+    }
 
     if (!inRoot) {
       return this.emit('reset')
     }
 
-    if (click && inRoot) {
-      return this._handleClickEvent(e)
-    }
-
-    // User drag-clicked in the Selectable area
-    if (!click) return this.emit('select', bounds)
+    return this._handleClickEvent(e)
   }
 
   _handleClickEvent(e) {
